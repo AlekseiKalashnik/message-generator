@@ -1,5 +1,6 @@
 package com.app.stock.messageGenerator.config;
 
+import com.app.stock.messageGenerator.entity.Agent;
 import lombok.RequiredArgsConstructor;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
@@ -10,6 +11,7 @@ import org.springframework.kafka.core.DefaultKafkaProducerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.ProducerFactory;
 
+import java.util.List;
 import java.util.Map;
 
 @Configuration
@@ -17,23 +19,21 @@ import java.util.Map;
 public class KafkaConfig {
     private final KafkaProperties kafkaProperties;
 
-    //TODO Change entity
-//    @Bean
-//    public ProducerFactory<String, UserDTO> producerFactory() {
-//        Map<String, Object> properties = kafkaProperties.buildProducerProperties();
-//        return new DefaultKafkaProducerFactory<>(properties);
-//    }
-//
-//    //TODO Change entity
-//    @Bean
-//    public KafkaTemplate<String, UserDTO> kafkaTemplate() {
-//        return new KafkaTemplate<>(producerFactory());
-//    }
-//
-//    @Bean
-//    public NewTopic topic() {
-//        return TopicBuilder
-//                .name("topic-1")
-//                .build();
-//    }
+    @Bean
+    public ProducerFactory<String, List<Agent>> producerFactory() {
+        Map<String, Object> properties = kafkaProperties.buildProducerProperties();
+        return new DefaultKafkaProducerFactory<>(properties);
+    }
+
+    @Bean
+    public KafkaTemplate<String, List<Agent>> kafkaTemplate() {
+        return new KafkaTemplate<>(producerFactory());
+    }
+
+    @Bean
+    public NewTopic topic() {
+        return TopicBuilder
+                .name("topic-1")
+                .build();
+    }
 }
