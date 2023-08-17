@@ -28,4 +28,6 @@ spec:
               #открытый ранее порт контейнера
               #kubectl port-forward (pod-name) 8181(браузер):80(контейнер)
               #Для тех, кто запускает kubectl не у себя, а на удаленном сервере, команда выглядит так:
-              #kubectl port-forward --address 0.0.0.0 my-web 8000:80
+              #kubectl port-forward --address 0.0.0.0 my-web 8183:80
+
+

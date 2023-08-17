@@ -29,7 +29,7 @@ public class GenerateService {
                     .messageEntities(messageList)
                     .build());
         }
-        log.info(agentsList.size() + "agents have created");
+        log.info(agentsList.size() + " - agents have created");
         return agentsList;
     }
 
@@ -46,7 +46,7 @@ public class GenerateService {
                     .qualityScore(random.nextInt(1, 101))
                     .build());
         }
-        log.info(telemetryMessageList.size() + "telemetry messages have created");
+        log.info(telemetryMessageList.size() + " - telemetry messages have created");
         return telemetryMessageList;
     }
 
