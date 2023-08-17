@@ -7,8 +7,6 @@ build:
   image:
     name: gcr.io/kaniko-project/executor:debug
     entrypoint: [""]
-    tags:
-      - timestamp=$(date +%Y%m%d%H%M%S)
   script:
     - mkdir -p /kaniko/.docker
     # Install jq.
@@ -20,7 +18,7 @@ build:
       /kaniko/executor
       --context "${CI_PROJECT_DIR}"
       --dockerfile "${CI_PROJECT_DIR}/Dockerfile"
-      --destination "cr.yandex/crpt2j4od8cl0kpuvph9/hello:$timestamp"
+      --destination "cr.yandex/crpt2j4od8cl0kpuvph9/hello:$(date +%Y%m%d%H%M%S)"
       --destination "cr.yandex/crpt2j4od8cl0kpuvph9/hello:latest"
     # Delete the metadata file.
     - rm /kaniko/token
