@@ -19,15 +19,15 @@ import java.util.concurrent.CompletableFuture;
 @Component
 @RequiredArgsConstructor
 public class ProcessMessage {
-    @Value(value = "${number_of_agents}")
-    private int numberOfAgents;
-    @Value(value = "${number_of_messages_per_minute}")
-    private int messagesPerMinute;
+//    @Value(value = "${number_of_agents}")
+//    private int numberOfAgents;
+//    @Value(value = "${number_of_messages_per_minute}")
+//    private int messagesPerMinute;
     private final KafkaProducer kafkaProducer;
     private final GenerateService generateService;
 
     @Async
-    public CompletableFuture<Void> sendMessages() {
+    public CompletableFuture<Void> sendMessages(int numberOfAgents, int messagesPerMinute) {
         log.info("begin sendMessages()");
         Timer timer = new Timer();
         TimerTask task = new TimerTask() {
