@@ -11,13 +11,13 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("api/v1")
+@RequestMapping("api/v1/send")
 public class EventController {
     private final ProcessMessage processMessage;
 
-    @GetMapping("/send/{numberOfAgents}/{messagesPerMinute}")
+    @GetMapping("/{numberOfAgents}/{messagesPerMinute}")
     public String createMessages(@PathVariable Integer numberOfAgents, @PathVariable Integer messagesPerMinute) {
-        processMessage.sendMessages(numberOfAgents, messagesPerMinute).join();
+        processMessage.sendMessages(numberOfAgents, messagesPerMinute);
         log.info("messages have sent");
         return "Start to send messages...";
     }
