@@ -5,18 +5,22 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 @Builder
-@JsonIgnoreProperties(ignoreUnknown=true)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class TelemetryMessage {
     @JsonProperty(value = "uuid")
-    String UUID;
+    private String UUID;
     @JsonProperty(value = "agent_id")
-    Gadget agentId;
+    private Gadget agentId;
     @JsonProperty(value = "previous_message_time")
-    Long previousMessageTime;
+    private Long previousMessageTime;
     @JsonProperty(value = "active_service")
-    ActiveService activeService;
+    private ActiveService activeService;
     @JsonProperty(value = "quality_score")
-    Integer qualityScore;
+    private Integer qualityScore;
+    @JsonProperty(value = "agents")
+    private List<Agent> agents;
 }
