@@ -9,6 +9,8 @@ import lombok.Data;
 @Builder
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Agent {
+    @JsonProperty(value = "uuid")
+    private String UUID;
     @JsonProperty(value = "agent_id")
     private Gadget agentId;
     private Manufacturer manufacturer;

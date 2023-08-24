@@ -19,9 +19,10 @@ public class GenerateService {
     public List<Agent> createAgents(Integer numberOfAgents) {
         log.info("begin createAgents()");
         List<Agent> agentsList = new ArrayList<>();
-        for (int i = 0; i <= numberOfAgents; i++) {
+        for (int i = 1; i <= numberOfAgents; i++) {
             Gadget gadget = Gadget.getRandom();
             agentsList.add(Agent.builder()
+                    .UUID(UUID.randomUUID().toString())
                     .agentId(gadget)
                     .manufacturer(Manufacturer.getRandom())
                     .os(OS.getRandom())

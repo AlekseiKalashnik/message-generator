@@ -5,10 +5,4 @@
 //
 //@SpringBootTest
 //class MessageGeneratorApplicationTests {
-//
-//	@Test
-//	void contextLoads() {
-//	}
-//
 //}
-//TODO: add tests + Testcontainers

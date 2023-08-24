@@ -13,6 +13,9 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 @Slf4j
 @Component
@@ -33,6 +36,6 @@ public class ProcessMessage {
                 kafkaProducer.sendMessageToTopic(message);
             }
         };
-        timer.scheduleAtFixedRate(task, 60000, requestDTO.messagesPerMinute());
+        timer.scheduleAtFixedRate(task, 60000, requestDTO.messagesPerMinute() * 1000L);
     }
 }
