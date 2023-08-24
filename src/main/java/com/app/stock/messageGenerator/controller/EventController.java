@@ -1,24 +1,25 @@
 package com.app.stock.messageGenerator.controller;
 
+import com.app.stock.messageGenerator.dto.RequestDTO;
 import com.app.stock.messageGenerator.job.ProcessMessage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Mono;
 
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("api/v1/send")
+@RequestMapping("api/v1/events")
 public class EventController {
     private final ProcessMessage processMessage;
 
-    @GetMapping("/{numberOfAgents}/{messagesPerMinute}")
-    public String createMessages(@PathVariable Integer numberOfAgents, @PathVariable Integer messagesPerMinute) {
-        processMessage.sendMessages(numberOfAgents, messagesPerMinute);
+    @PostMapping("/send")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Mono<String> createMessages(@RequestBody RequestDTO requestDTO) {
+        processMessage.sendMessages(requestDTO);
         log.info("messages have sent");
-        return "Start to send messages...";
+        return Mono.just("Start to send messages...");
     }
 }
