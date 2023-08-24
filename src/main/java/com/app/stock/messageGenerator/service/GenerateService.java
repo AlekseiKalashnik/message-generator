@@ -16,38 +16,34 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class GenerateService {
 
-    public List<Agent> createAgents(Integer numberOfAgents, List<TelemetryMessage> messageList) {
+    public List<Agent> createAgents(Integer numberOfAgents) {
         log.info("begin createAgents()");
         List<Agent> agentsList = new ArrayList<>();
         for (int i = 0; i <= numberOfAgents; i++) {
             Gadget gadget = Gadget.getRandom();
-            messageList.forEach(x -> x.setAgentId(gadget));
             agentsList.add(Agent.builder()
                     .agentId(gadget)
                     .manufacturer(Manufacturer.getRandom())
                     .os(OS.getRandom())
-                    .messageEntities(messageList)
                     .build());
         }
         log.info(agentsList.size() + " - agents have created");
         return agentsList;
     }
 
-    public List<TelemetryMessage> createTelemetryMessages(Integer numberOfMessagesPerMinute) {
+    public TelemetryMessage createTelemetryMessage(List<Agent> agentList) {
         log.info("begin createTelemetryMessages()");
         Random random = new Random();
-        List<TelemetryMessage> telemetryMessageList = new ArrayList<>();
-        for (int i = 0; i <= numberOfMessagesPerMinute; i++) {
-            telemetryMessageList.add(TelemetryMessage.builder()
-                    .UUID(UUID.randomUUID().toString())
-                    .agentId(Gadget.getRandom())
-                    .previousMessageTime(generateUnixTimestampPerWeek())
-                    .activeService(ActiveService.getRandom())
-                    .qualityScore(random.nextInt(1, 101))
-                    .build());
-        }
-        log.info(telemetryMessageList.size() + " - telemetry messages have created");
-        return telemetryMessageList;
+        TelemetryMessage message = TelemetryMessage.builder()
+                .UUID(UUID.randomUUID().toString())
+                .agentId(Gadget.getRandom())
+                .previousMessageTime(generateUnixTimestampPerWeek())
+                .activeService(ActiveService.getRandom())
+                .qualityScore(random.nextInt(1, 101))
+                .agents(agentList)
+                .build();
+        log.info("telemetry message has created");
+        return message;
     }
 
     public Long generateUnixTimestampPerWeek() {

@@ -1,5 +1,6 @@
 package com.app.stock.messageGenerator.job;
 
+import com.app.stock.messageGenerator.dto.RequestDTO;
 import com.app.stock.messageGenerator.entity.Agent;
 import com.app.stock.messageGenerator.entity.TelemetryMessage;
 import com.app.stock.messageGenerator.service.GenerateService;
@@ -21,17 +22,17 @@ public class ProcessMessage {
     private final GenerateService generateService;
 
     @Async
-    public void sendMessages(int numberOfAgents, int messagesPerMinute) {
+    public void sendMessages(RequestDTO requestDTO) {
         log.info("begin sendMessages()");
         Timer timer = new Timer();
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
-                List<TelemetryMessage> messages = generateService.createTelemetryMessages(messagesPerMinute);
-                List<Agent> agents = generateService.createAgents(numberOfAgents, messages);
-                kafkaProducer.sendMessageToTopic(agents);
+                List<Agent> agents = generateService.createAgents(requestDTO.numberOfAgents());
+                TelemetryMessage message = generateService.createTelemetryMessage(agents);
+                kafkaProducer.sendMessageToTopic(message);
             }
         };
-        timer.scheduleAtFixedRate(task, 60000, messagesPerMinute);
+        timer.scheduleAtFixedRate(task, 60000, requestDTO.messagesPerMinute());
     }
 }
