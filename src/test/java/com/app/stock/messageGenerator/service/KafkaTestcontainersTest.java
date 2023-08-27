@@ -3,6 +3,7 @@ package com.app.stock.messageGenerator.service;
 import com.app.stock.messageGenerator.entity.Gadget;
 import com.app.stock.messageGenerator.entity.TelemetryMessage;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,12 +18,10 @@ import org.testcontainers.utility.DockerImageName;
 
 import java.util.UUID;
 
-import static org.junit.Assert.assertEquals;
-
 @Slf4j
 @SpringBootTest
 @Testcontainers
-class KafkaTestContainersTest {
+class KafkaTestcontainersTest {
 
     @Container
     static KafkaContainer kafka = new KafkaContainer(DockerImageName.parse("confluentinc/cp-kafka:7.3.3"));
@@ -53,6 +52,6 @@ class KafkaTestContainersTest {
 
         consumer.getMessageFromTopic(message);
 
-        assertEquals(consumer.getPayload(), message.toString());
+        Assertions.assertEquals(consumer.getPayload(), message.toString());
     }
 }
