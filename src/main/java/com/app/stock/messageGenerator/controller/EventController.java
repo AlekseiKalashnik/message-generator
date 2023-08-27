@@ -19,7 +19,7 @@ public class EventController {
     @ResponseStatus(HttpStatus.CREATED)
     public Mono<String> createMessages(@RequestBody RequestDTO requestDTO) {
         processMessage.sendMessages(requestDTO);
-        log.info("messages have sent");
+        log.info("messages have sent from controller");
         return Mono.just("Start to send messages...");
     }
 }
