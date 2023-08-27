@@ -11,13 +11,14 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class KafkaProducer {
+
     @Value("${topic.name}")
     private String topic;
 
     private final KafkaTemplate<String, TelemetryMessage> kafkaTemplate;
 
     public void sendMessageToTopic(TelemetryMessage message) {
+        log.info("sending message='{}' to topic='{}'", message, topic);
         kafkaTemplate.send(topic, message);
-        log.info("kafka message produced");
     }
 }
