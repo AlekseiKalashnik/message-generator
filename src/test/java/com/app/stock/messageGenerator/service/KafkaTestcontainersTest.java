@@ -2,7 +2,6 @@ package com.app.stock.messageGenerator.service;
 
 import com.app.stock.messageGenerator.entity.Gadget;
 import com.app.stock.messageGenerator.entity.TelemetryMessage;
-import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +17,6 @@ import org.testcontainers.utility.DockerImageName;
 
 import java.util.UUID;
 
-@Slf4j
 @SpringBootTest
 @Testcontainers
 class KafkaTestcontainersTest {
