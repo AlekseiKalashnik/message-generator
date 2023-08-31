@@ -1,4 +1,4 @@
-FROM openjdk:17-oracle
+FROM openjdk:17-jdk-slim
 EXPOSE 8183
 ARG JAR_FILE=*.jar
 COPY ssl /etc/ssl
