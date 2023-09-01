@@ -41,8 +41,8 @@ public class GenerateService {
                 .previousMessageTime(generateUnixTimestampPerWeek())
                 .activeService(ActiveService.getRandom())
                 .qualityScore(random.nextInt(1, 101))
-                .agents(agentList)
                 .build();
+        message.setAgents(agentList.stream().peek(agent -> agent.setTelemetryMessage(message)).toList());
         log.info("telemetry message has created");
         return message;
     }
