@@ -15,5 +15,5 @@ public class Agent {
     private Gadget agentId;
     private Manufacturer manufacturer;
     private OS os;
-    private TelemetryMessage telemetryMessage;
+    private String telemetryMessage;
 }

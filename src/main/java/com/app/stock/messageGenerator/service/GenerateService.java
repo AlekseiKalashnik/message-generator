@@ -42,7 +42,7 @@ public class GenerateService {
                 .activeService(ActiveService.getRandom())
                 .qualityScore(random.nextInt(1, 101))
                 .build();
-        message.setAgents(agentList.stream().peek(agent -> agent.setTelemetryMessage(message)).toList());
+        message.setAgents(agentList.stream().peek(x -> x.setTelemetryMessage(message.getUUID())).toList());
         log.info("telemetry message has created");
         return message;
     }
