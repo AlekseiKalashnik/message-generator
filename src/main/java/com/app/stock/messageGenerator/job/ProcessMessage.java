@@ -36,6 +36,6 @@ public class ProcessMessage {
                 kafkaProducer.sendMessageToTopic(message);
             }
         };
-        timer.scheduleAtFixedRate(task, 60000, requestDTO.messagesPerMinute() * 1000L);
+        timer.scheduleAtFixedRate(task, 1000, 60000L / requestDTO.messagesPerMinute());
     }
 }
